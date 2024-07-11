@@ -1,0 +1,113 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+>
+    <Dialog showHeader="false">
+        <content>
+            <f:Form editable="true">
+                <f:layout>
+                    <f:ColumnLayout />
+                </f:layout>
+                <f:formContainers>
+                    <f:FormContainer>
+                        <f:formElements>
+                            <f:FormElement label="Scheme Name">
+                                <f:fields>
+                                    <Text
+                                        text="{localModel>/SalesTransData/0/schemename}"
+                                    />
+                                </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="Region">
+                                <f:fields>
+                                    <Text
+                                        text="{localModel>/SalesTransData/0/REGIONCODE}"
+                                    />
+                                </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="Percentile">
+                                <f:fields>
+                                    <Text
+                                        text="{localModel>/SalesTransData/0/percentile} %"
+                                    />
+                                </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="Min Sales">
+                                <f:fields>
+                                    <Text
+                                        text="₹ {localModel>/SalesTransData/0/minsales}"
+                                    />
+                                </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="From Date">
+                                <f:fields>
+                                    <Text
+                                        text="{path: 'localModel>/SalesTransData/0/from_date', formatter: '.onDateFormatter'}"
+                                    />
+                                </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="To Date">
+                                <f:fields>
+                                    <Text
+                                        text="{path: 'localModel>/SalesTransData/0/to_date', formatter: '.onDateFormatter'}"
+                                    />
+                                </f:fields>
+                            </f:FormElement>
+                        </f:formElements>
+                    </f:FormContainer>
+                </f:formContainers>
+            </f:Form>
+
+            <Table
+                growingThreshold="10"
+                growing="true"
+                items="{localModel>/SalesTransData}"
+            >
+                <columns>
+                    <Column mergeDuplicates="true">
+                        <Label text="Sales Agent" />
+                    </Column>
+                    <Column>
+                        <Label text="Stock Keeping Unit" />
+                    </Column>
+                    <Column>
+                        <Label text="Sales Date" />
+                    </Column>
+                    <Column>
+                        <Label text="Daily Sales" />
+                    </Column>
+                    <Column>
+                        <Label text="Total Sales" />
+                    </Column>
+                    <Column>
+                        <Label text="Total Incentive" />
+                    </Column>
+                </columns>
+                <ColumnListItem>
+                    <cells>
+                        <Text text="{localModel>SALES_AGENT}" />
+
+                        <Text text="{localModel>SKUID}" />
+                        <Text
+                            text="{path: 'localModel>SALE_DATE', formatter: '.onDateFormatter'}"
+                        />
+                        <Text text="₹ {localModel>DAILY_SALES}" />
+
+                        <Text text="₹ {localModel>TOTAL_SALES}" />
+                        <Text text="₹ {localModel>TOTAL_INCENTIVE}" />
+                    </cells>
+                </ColumnListItem>
+            </Table>
+        </content>
+
+        <endButton>
+            <Button
+                press="onCalculatePopClose"
+                text="Close"
+                type="Reject"
+                icon="sap-icon://cancel"
+            />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

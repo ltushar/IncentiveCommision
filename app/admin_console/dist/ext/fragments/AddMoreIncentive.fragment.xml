@@ -1,0 +1,101 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+>
+    <Dialog showHeader="false">
+        <content>
+            <f:Form editable="true">
+                <f:layout>
+                    <f:ColumnLayout />
+                </f:layout>
+                <f:formContainers>
+                    <f:FormContainer>
+                        <f:formElements>
+                            <f:FormElement label="Scheme Name">
+                                <f:fields>
+                                    <Input
+                                        value="{localModel>/incentive/schemename}"
+                                    />
+                                </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="SKU">
+                                <f:fields>
+                                    <ComboBox
+                                        items="{/SkuCode}"
+                                        selectedKey="{localModel>/incentive/skuid}"
+                                    >
+                                        <core:Item
+                                            text="{sku_name}"
+                                            key="{skucode}"
+                                        />
+                                    </ComboBox>
+                                </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="Region">
+                                <f:fields>
+                                    <ComboBox
+                                        items="{/Region}"
+                                        selectedKey="{localModel>/incentive/regioncode}"
+                                    >
+                                        <core:Item
+                                            text="{Region_name}"
+                                            key="{region_code}"
+                                        />
+                                    </ComboBox>
+                                </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="Employee Code">
+                                <f:fields>
+                                    <ComboBox
+                                        items="{/OrgData}"
+                                        selectedKey="{localModel>/incentive/empcode}"
+                                    >
+                                        <core:Item
+                                            text="{function}"
+                                            key="{empcode}"
+                                        />
+                                    </ComboBox>
+                                </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="Minimum Sales">
+                                <f:fields>
+                                    <Input
+                                        value="{localModel>/incentive/minsales}"
+                                    />
+                                </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="Percentage">
+                                <f:fields>
+                                    <StepInput
+                                        stepMode="AdditionAndSubtraction"
+                                        value="{localModel>/incentive/percentile}"
+                                        min="{localModel>/min}"
+                                        max="{localModel>/max}"
+                                        change="onPercentageChange"
+                                    />
+                                </f:fields>
+                            </f:FormElement>
+                        </f:formElements>
+                    </f:FormContainer>
+                </f:formContainers>
+            </f:Form>
+        </content>
+        <beginButton>
+            <Button
+                press="onIncentiveSubmit"
+                text="Submit"
+                type="Accept"
+                icon="sap-icon://save"
+            />
+        </beginButton>
+        <endButton>
+            <Button
+                press="onPressIncentiveAddMoreClose"
+                text="Close"
+                type="Reject"
+                icon="sap-icon://cancel"
+            />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

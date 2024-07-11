@@ -1,0 +1,168 @@
+_schema-version: "3.1"
+ID: icms
+description: A simple CAP project.
+version: 1.1.0
+modules:
+- name: icms-srv
+  type: nodejs
+  path: gen/srv
+  requires:
+  - name: icms-db
+  - name: uaa_icms
+  provides:
+  - name: srv-api
+    properties:
+      srv-url: ${default-url}
+  parameters:
+    buildpack: nodejs_buildpack
+    readiness-health-check-http-endpoint: /health
+    readiness-health-check-type: http
+  build-parameters:
+    builder: npm
+- name: icms-db-deployer
+  type: hdb
+  path: gen/db
+  requires:
+  - name: icms-db
+  parameters:
+    buildpack: nodejs_buildpack
+- name: icms-destination-content
+  type: com.sap.application.content
+  requires:
+  - name: icms-destination-service
+    parameters:
+      content-target: true
+  - name: icms_html_repo_host
+    parameters:
+      service-key:
+        name: icms_html_repo_host-key
+  - name: uaa_icms
+    parameters:
+      service-key:
+        name: uaa_icms-key
+  parameters:
+    content:
+      instance:
+        destinations:
+        - Name: icmsapprouter_icms_html_repo_host
+          ServiceInstanceName: icms-html5-app-host-service
+          ServiceKeyName: icms_html_repo_host-key
+          sap.cloud.service: icmsapprouter
+        - Authentication: OAuth2UserTokenExchange
+          Name: icmsapprouter_uaa_icms
+          ServiceInstanceName: icms-xsuaa-service
+          ServiceKeyName: uaa_icms-key
+          sap.cloud.service: icmsapprouter
+        existing_destinations_policy: ignore
+  build-parameters:
+    no-source: true
+- name: icms-app-content
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: icms_html_repo_host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - adminconsole.zip
+      name: adminconsole
+      target-path: resources/
+    - artifacts:
+      - manager.zip
+      name: manager
+      target-path: resources/
+    - artifacts:
+      - sales.zip
+      name: sales
+      target-path: resources/
+- name: adminconsole
+  type: html5
+  path: app/admin_console
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: manager
+  type: html5
+  path: app/manager
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: sales
+  type: html5
+  path: app/sales
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+resources:
+- name: icms-db
+  type: com.sap.xs.hdi-container
+  parameters:
+    service: hana
+    service-plan: hdi-shared
+- name: icms-destination-service
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: true
+      init_data:
+        instance:
+          destinations:
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
+          - Authentication: NoAuthentication
+            HTML5.DynamicDestination: true
+            HTML5.ForwardAuthToken: true
+            Name: icms-srv-api
+            ProxyType: Internet
+            Type: HTTP
+            URL: ~{srv-api/srv-url}
+          existing_destinations_policy: update
+      version: 1.0.0
+    service: destination
+    service-name: icms-destination-service
+    service-plan: lite
+  requires:
+  - name: srv-api
+- name: icms_html_repo_host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: icms-html5-app-host-service
+    service-plan: app-host
+- name: uaa_icms
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      tenant-mode: dedicated
+      xsappname: icms
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: icms-xsuaa-service
+    service-plan: application
+parameters:
+  deploy_mode: html5-repo
+  enable-parallel-deployments: true
+build-parameters:
+  before-all:
+  - builder: custom
+    commands:
+    - npm ci
+    - npx cds build --production

@@ -1,0 +1,64 @@
+<mvc:View
+    xmlns:core="sap.ui.core"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:tnt="sap.tnt"
+    controllerName="adminconsole.ext.main.Main"
+>
+    <tnt:ToolPage>
+        <tnt:header>
+            <tnt:ToolHeader>
+                <ObjectHeader title="Admin Console" />
+            </tnt:ToolHeader>
+        </tnt:header>
+        <tnt:sideContent>
+            <tnt:SideNavigation
+                itemSelect="onItemSelect"
+                selectedKey="idPageCalculate"
+            >
+                <tnt:NavigationList items="{localModel>/pages}">
+                    <tnt:NavigationListItem
+                        text="{localModel>text}"
+                        key="{localModel>key}"
+                        icon="{localModel>icon}"
+                    />
+                </tnt:NavigationList>
+            </tnt:SideNavigation>
+        </tnt:sideContent>
+        <tnt:mainContents>
+            <NavContainer
+                id="idNavContainer"
+                initialPage="idPageCalculate"
+            >
+                <pages>
+                    <ScrollContainer
+                        id="idPageIncentive"
+                        horizontal="false"
+                        vertical="true"
+                        height="100%"
+                        class="sapUiContentPadding"
+                    >
+                        <content>
+                            <mvc:XMLView
+                                viewName="adminconsole.ext.pages.Incentive"
+                            />
+                        </content>
+                    </ScrollContainer>
+                    <ScrollContainer
+                        id="idPageCalculate"
+                        horizontal="false"
+                        vertical="true"
+                        height="100%"
+                        class="sapUiContentPadding"
+                    >
+                        <content>
+                            <mvc:XMLView
+                                viewName="adminconsole.ext.pages.Calculate"
+                            />
+                        </content>
+                    </ScrollContainer>
+                </pages>
+            </NavContainer>
+        </tnt:mainContents>
+    </tnt:ToolPage>
+</mvc:View>

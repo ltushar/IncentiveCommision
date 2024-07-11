@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="CV_C_INCENTIVERANFORDATES" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" hierarchyGeneration="SQL" cacheInvalidationPeriod="NONE" enforceSqlExecution="true" application="BAS">
+<descriptions defaultDescription="CV_C_INCENTIVERANFORDATES"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="ICM_INSENTIVERANFORDATES">
+    <resourceUri>ICM_INSENTIVERANFORDATES</resourceUri>
+  </DataSource>
+</dataSources>
+<snapshotProcedures/>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1">
+    <viewAttributes>
+      <viewAttribute id="ID"/>
+      <viewAttribute id="ICID"/>
+      <viewAttribute id="SCHEMEID"/>
+      <viewAttribute id="SCHEMENAME"/>
+      <viewAttribute id="REGIONCODE"/>
+      <viewAttribute id="SKUID"/>
+      <viewAttribute id="EMPCODE"/>
+      <viewAttribute id="MINSALES"/>
+      <viewAttribute id="PERCENTILE"/>
+      <viewAttribute id="FROM_DATE"/>
+      <viewAttribute id="TO_DATE"/>
+      <viewAttribute id="STATUS"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="ICM_INSENTIVERANFORDATES"/>
+  </calculationView>
+</calculationViews>
+
+<logicalModel id="Projection_1">
+  <attributes>
+    <attribute id="ID_2" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ID_2"/>
+      <keyMapping columnObjectName="Projection_1" columnName="ID"/>
+    </attribute>
+    <attribute id="SCHEMEID" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SCHEMEID"/>
+      <keyMapping columnObjectName="Projection_1" columnName="SCHEMEID"/>
+    </attribute>
+    <attribute id="SCHEMENAME" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SCHEMENAME"/>
+      <keyMapping columnObjectName="Projection_1" columnName="SCHEMENAME"/>
+    </attribute>
+    <attribute id="EMPCODE" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="EMPCODE"/>
+      <keyMapping columnObjectName="Projection_1" columnName="EMPCODE"/>
+    </attribute>
+    <attribute id="FROM_DATE" order="8" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="FROM_DATE"/>
+      <keyMapping columnObjectName="Projection_1" columnName="FROM_DATE"/>
+    </attribute>
+    <attribute id="TO_DATE" order="9" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="TO_DATE"/>
+      <keyMapping columnObjectName="Projection_1" columnName="TO_DATE"/>
+    </attribute>
+    <attribute id="STATUS" order="10" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="STATUS"/>
+      <keyMapping columnObjectName="Projection_1" columnName="STATUS"/>
+    </attribute>
+    <attribute id="REGIONCODE$local">
+      <descriptions defaultDescription="REGIONCODE"/>
+      <keyMapping columnObjectName="Projection_1" columnName="REGIONCODE"/>
+    </attribute>
+    <attribute id="SKUID$local">
+      <descriptions defaultDescription="SKUID"/>
+      <keyMapping columnObjectName="Projection_1" columnName="SKUID"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="ICID" order="2" aggregationType="count" measureType="simple">
+      <descriptions defaultDescription="ICID"/>
+      <measureMapping columnObjectName="Projection_1" columnName="ICID"/>
+      <exceptionAggregationMetadata/>
+    </measure>
+    <measure id="MINSALES" order="6" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="MINSALES"/>
+      <measureMapping columnObjectName="Projection_1" columnName="MINSALES"/>
+      <exceptionAggregationMetadata/>
+    </measure>
+    <measure id="PERCENTILE" order="7" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="PERCENTILE"/>
+      <measureMapping columnObjectName="Projection_1" columnName="PERCENTILE"/>
+      <exceptionAggregationMetadata/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+
+
+  <sharedDimensions>
+
+    <logicalJoin associatedObjectUri="CV_D_REGIONMASTER">
+
+      <attributes>
+
+        <attributeRef>REGIONCODE$local</attributeRef>
+
+      </attributes>
+
+      <associatedAttributeNames>
+
+        <attributeName>REGION_CODE</attributeName>
+
+      </associatedAttributeNames>
+
+      <properties cardinality="CN_N" joinType="leftOuter" joinOperator="Equal"/>
+
+      <associatedAttributeFeatures>
+
+        <attributeReference attributeName="ID" hidden="true"/>
+
+        <attributeReference attributeName="REGION_CODE" hidden="true"/>
+
+        <attributeReference attributeName="ISDEL" hidden="true"/>
+
+      </associatedAttributeFeatures>
+
+    </logicalJoin>
+
+    <logicalJoin associatedObjectUri="CV_D_SKUID">
+
+      <attributes>
+
+        <attributeRef>SKUID$local</attributeRef>
+
+      </attributes>
+
+      <associatedAttributeNames>
+
+        <attributeName>SKUCODE</attributeName>
+
+      </associatedAttributeNames>
+
+      <properties cardinality="CN_N" joinType="leftOuter" joinOperator="Equal"/>
+
+      <associatedAttributeFeatures>
+
+        <attributeReference alias="ID_1" attributeName="ID" hidden="true"/>
+
+        <attributeReference alias="ISDEL_1" attributeName="ISDEL" hidden="true"/>
+
+        <attributeReference attributeName="SKUCODE" hidden="true"/>
+
+        <attributeReference attributeName="SKU_DESCRIPTION" hidden="true"/>
+
+      </associatedAttributeFeatures>
+
+    </logicalJoin>
+
+  </sharedDimensions>
+
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+    
+  
+    <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="100" y="289"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Projection_1" modelObjectNameSpace="StarJoinViewNodeInput" modelObjectType="repository">
+      <upperLeftCorner x="269.9091796875" y="16"/>
+      <rectangleSize width="164.84228515625"/>
+    </shape>
+    <shape modelObjectName="CV_D_REGIONMASTER" modelObjectNameSpace="StarJoinViewNodeSharedCV" modelObjectType="repository">
+      <upperLeftCorner x="498.75146484375" y="80"/>
+      <rectangleSize width="200.6875"/>
+    </shape>
+    <shape modelObjectName="CV_D_SKUID" modelObjectNameSpace="StarJoinViewNodeSharedCV" modelObjectType="repository">
+      <upperLeftCorner x="16" y="80"/>
+      <rectangleSize width="189.9091796875"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

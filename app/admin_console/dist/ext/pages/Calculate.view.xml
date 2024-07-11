@@ -1,0 +1,145 @@
+<mvc:View
+    xmlns:table="sap.ui.table"
+    xmlns:core="sap.ui.core"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    controllerName="adminconsole.ext.main.Main"
+>
+    <VBox>
+        <Bar>
+            <contentRight>
+                <Button
+                    press="onCalculationSubmit"
+                    type="Emphasized"
+                    text="Submit"
+                    icon="sap-icon://save"
+                />
+            </contentRight>
+        </Bar>
+        <f:Form editable="true">
+            <f:layout>
+                <f:ColumnLayout />
+            </f:layout>
+            <f:formContainers>
+                <f:FormContainer>
+                    <f:formElements>
+                        <f:FormElement label="Scheme Name">
+                            <f:fields>
+                                <ComboBox
+                                    selectionChange="onIncentiveCalSelect"
+                                    items="{/Insentive}"
+                                    value="{localModel>/calculate/schemename}"
+                                    selectedKey="{localModel>/calculate/schemeid}"
+                                >
+                                    <core:Item
+                                        text="{schemename}"
+                                        key="{schemeid}"
+                                    />
+                                </ComboBox>
+                            </f:fields>
+                        </f:FormElement>
+                        <f:FormElement label="SKU">
+                            <f:fields>
+                                <Text text="{localModel>/calculate/skuid}" />
+                            </f:fields>
+                        </f:FormElement>
+                        <f:FormElement label="Region">
+                            <f:fields>
+                                <Text
+                                    text="{localModel>/calculate/regioncode}"
+                                />
+                            </f:fields>
+                        </f:FormElement>
+                        <f:FormElement label="Employee Code">
+                            <f:fields>
+                                <Text text="{localModel>/calculate/empcode}" />
+                            </f:fields>
+                        </f:FormElement>
+                        <f:FormElement label="Minimum Sales">
+                            <f:fields>
+                                <Text text="{localModel>/calculate/minsales}" />
+                            </f:fields>
+                        </f:FormElement>
+                        <f:FormElement label="Percentage">
+                            <f:fields>
+                                <Text
+                                    text="{localModel>/calculate/percentile}"
+                                />
+                            </f:fields>
+                        </f:FormElement>
+
+                        <f:FormElement label="From Date">
+                            <f:fields>
+                                <DatePicker
+                                    displayFormat="dd MMM, yyyy"
+                                    valueFormat="yyyy-MM-dd"
+                                    change="onCalculateFromDateChange"
+                                    value="{localModel>/calculate/from_date}"
+                                />
+                            </f:fields>
+                        </f:FormElement>
+                        <f:FormElement label="To Date">
+                            <f:fields>
+                                <DatePicker
+                                    displayFormat="dd MMM, yyyy"
+                                    valueFormat="yyyy-MM-dd"
+                                    editable="{= ${localModel>/calculate/from_date}.length > 0}"
+                                    minDate="{localModel>/calculate/to_date_min_date}"
+                                    value="{localModel>/calculate/to_date}"
+                                />
+                            </f:fields>
+                        </f:FormElement>
+                    </f:formElements>
+                </f:FormContainer>
+            </f:formContainers>
+        </f:Form>
+        <Table
+            id="idCalculationTable"
+            items="{path: '/InsentiveRanFor', sorter: {path: 'createdAt'}}"
+        >
+            <columns>
+                <Column>
+                    <Label text="Scheme Name" />
+                </Column>
+                <Column>
+                    <Label text="SKU Name" />
+                </Column>
+                <Column>
+                    <Label text="Region" />
+                </Column>
+                <Column>
+                    <Label text="Employee Code" />
+                </Column>
+                <Column>
+                    <Label text="Minimum Sales" />
+                </Column>
+                <Column>
+                    <Label text="Incentive Percentage" />
+                </Column>
+                <Column>
+                    <Label text="From Date" />
+                </Column>
+                <Column>
+                    <Label text="To Date" />
+                </Column>
+            </columns>
+            <ColumnListItem>
+                <cells>
+                    <Label text="{path: 'schemename'}" />
+                    <Label text="{path: 'skuid', formatter: '._onFormatSKU'}" />
+                    <Label
+                        text="{path: 'regioncode', formatter: '._onFormatRegion'}"
+                    />
+                    <Label
+                        text="{path: 'empcode', formatter: '._onFormatOrg'}"
+                    />
+                    <Label text="{minsales}" />
+                    <Label text="{percentile}" />
+                    <Label text="{from_date}" />
+                    <Label text="{to_date}" />
+                </cells>
+            </ColumnListItem>
+        </Table>
+    </VBox>
+</mvc:View>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="CV_C_TRANS_caldata" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" hierarchyGeneration="SQL" outputViewType="Aggregation" cacheInvalidationPeriod="NONE" enforceSqlExecution="true" application="BAS">
+<descriptions defaultDescription="CV_C_TRANS_caldata"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="ICM_TRANS_CAL_DATA">
+    <resourceUri>ICM_TRANS_CAL_DATA</resourceUri>
+  </DataSource>
+</dataSources>
+<snapshotProcedures/>
+<calculationViews/>
+
+<logicalModel id="ICM_TRANS_CAL_DATA">
+  <attributes>
+    <attribute id="CID" order="1" semanticType="empty" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CID"/>
+      <keyMapping columnObjectName="ICM_TRANS_CAL_DATA" columnName="CID"/>
+    </attribute>
+    <attribute id="SCHEMEID" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SCHEMEID"/>
+      <keyMapping columnObjectName="ICM_TRANS_CAL_DATA" columnName="SCHEMEID"/>
+    </attribute>
+    <attribute id="SCHEME" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SCHEME"/>
+      <keyMapping columnObjectName="ICM_TRANS_CAL_DATA" columnName="SCHEME"/>
+    </attribute>
+    <attribute id="FROM_DATE" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="FROM_DATE"/>
+      <keyMapping columnObjectName="ICM_TRANS_CAL_DATA" columnName="FROM_DATE"/>
+    </attribute>
+    <attribute id="TO_DATE" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="TO_DATE"/>
+      <keyMapping columnObjectName="ICM_TRANS_CAL_DATA" columnName="TO_DATE"/>
+    </attribute>
+    <attribute id="SKUID" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SKUID"/>
+      <keyMapping columnObjectName="ICM_TRANS_CAL_DATA" columnName="SKUID"/>
+    </attribute>
+    <attribute id="REGIONCODE" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REGIONCODE"/>
+      <keyMapping columnObjectName="ICM_TRANS_CAL_DATA" columnName="REGIONCODE"/>
+    </attribute>
+    <attribute id="SALES_AGENT" order="8" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SALES_AGENT"/>
+      <keyMapping columnObjectName="ICM_TRANS_CAL_DATA" columnName="SALES_AGENT"/>
+    </attribute>
+    <attribute id="SALE_DATE" order="9" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SALE_DATE"/>
+      <keyMapping columnObjectName="ICM_TRANS_CAL_DATA" columnName="SALE_DATE"/>
+    </attribute>
+    <attribute id="STATUS" order="15" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="STATUS"/>
+      <keyMapping columnObjectName="ICM_TRANS_CAL_DATA" columnName="STATUS"/>
+    </attribute>
+    <attribute id="ISDEL" order="16" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ISDEL"/>
+      <keyMapping columnObjectName="ICM_TRANS_CAL_DATA" columnName="ISDEL"/>
+    </attribute>
+    <attribute id="CREATEDDATE" order="20" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CREATEDDATE"/>
+      <keyMapping columnObjectName="ICM_TRANS_CAL_DATA" columnName="CREATEDDATE"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="DAILY_SALES" order="10" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="DAILY_SALES"/>
+      <measureMapping columnObjectName="ICM_TRANS_CAL_DATA" columnName="DAILY_SALES"/>
+      <exceptionAggregationMetadata/>
+    </measure>
+    <measure id="TOTAL_SALES" order="11" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="TOTAL_SALES"/>
+      <measureMapping columnObjectName="ICM_TRANS_CAL_DATA" columnName="TOTAL_SALES"/>
+      <exceptionAggregationMetadata/>
+    </measure>
+    <measure id="MINSALES" order="12" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="MINSALES"/>
+      <measureMapping columnObjectName="ICM_TRANS_CAL_DATA" columnName="MINSALES"/>
+      <exceptionAggregationMetadata/>
+    </measure>
+    <measure id="PERCENTILE" order="13" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="PERCENTILE"/>
+      <measureMapping columnObjectName="ICM_TRANS_CAL_DATA" columnName="PERCENTILE"/>
+      <exceptionAggregationMetadata/>
+    </measure>
+    <measure id="TOTALINSENTIVE" order="14" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="TOTALINSENTIVE"/>
+      <measureMapping columnObjectName="ICM_TRANS_CAL_DATA" columnName="TOTALINSENTIVE"/>
+      <exceptionAggregationMetadata/>
+    </measure>
+    <measure id="ICID" order="17" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="ICID"/>
+      <measureMapping columnObjectName="ICM_TRANS_CAL_DATA" columnName="ICID"/>
+      <exceptionAggregationMetadata/>
+    </measure>
+    <measure id="JOBID" order="18" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="JOBID"/>
+      <measureMapping columnObjectName="ICM_TRANS_CAL_DATA" columnName="JOBID"/>
+      <exceptionAggregationMetadata/>
+    </measure>
+    <measure id="ROWSID" order="19" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="ROWSID"/>
+      <measureMapping columnObjectName="ICM_TRANS_CAL_DATA" columnName="ROWSID"/>
+      <exceptionAggregationMetadata/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+    
+  </shapes>
+</layout>
+</Calculation:scenario>

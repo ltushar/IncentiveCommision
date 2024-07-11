@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="CV_D_SKUID" applyPrivilegeType="NONE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="3.0" hierarchyGeneration="SQL" outputViewType="Projection" cacheInvalidationPeriod="NONE" enforceSqlExecution="true" application="BAS">
+<descriptions defaultDescription="CV_D_SKUID"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="ICM_SKU_MASTER">
+    <resourceUri>ICM_SKU_MASTER</resourceUri>
+  </DataSource>
+</dataSources>
+<snapshotProcedures/>
+<calculationViews/>
+
+<logicalModel id="ICM_SKU_MASTER">
+  <attributes>
+    <attribute id="ID" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ID"/>
+      <keyMapping columnObjectName="ICM_SKU_MASTER" columnName="ID"/>
+    </attribute>
+    <attribute id="SKUCODE" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SKUCODE"/>
+      <keyMapping columnObjectName="ICM_SKU_MASTER" columnName="SKUCODE"/>
+    </attribute>
+    <attribute id="SKU_NAME" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SKU_NAME"/>
+      <keyMapping columnObjectName="ICM_SKU_MASTER" columnName="SKU_NAME"/>
+    </attribute>
+    <attribute id="SKU_DESCRIPTION" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SKU_DESCRIPTION"/>
+      <keyMapping columnObjectName="ICM_SKU_MASTER" columnName="SKU_DESCRIPTION"/>
+    </attribute>
+    <attribute id="ISDEL" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ISDEL"/>
+      <keyMapping columnObjectName="ICM_SKU_MASTER" columnName="ISDEL"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+    
+  </shapes>
+</layout>
+</Calculation:scenario>

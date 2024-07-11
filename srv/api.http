@@ -1,0 +1,87 @@
+### Get API for report incident
+GET http://localhost:4004/browse/Insentive
+
+### Post API for report incident
+POST http://localhost:4004/browse/Insentive
+Content-Type: application/json
+
+{  
+    "schemeid": "ISC1",
+    "schemename": "INCENTIVE SCHEME NO 1",
+    "skuid": "",
+    "regioncode": "W001",
+    "empcode":"",
+    "minsales": "75000",
+    "percentile": "3" 
+}
+
+### To Update the exisitng scheme
+PUT  http://localhost:4004/browse/Insentive(ID=9079b08c-375d-4487-bdfe-f13ece3c8dc0,IID=2)
+Content-Type: application/json
+
+{  
+    "schemeid": "ISC1",
+    "schemename": "INCENTIVE SCHEME NO 1",
+    "skuid": "",
+    "regioncode": "W001",
+    "empcode":"",
+    "minsales": "75000",
+    "percentile": "1.75" 
+}
+
+### 
+POST http://localhost:4004/browse1/calculatedata
+Content-Type: application/json
+ 
+{
+"schemeid": "ISC1",
+"schemename":"INCENTIVE SCHEME NO 1",
+"skuid":"",
+"regioncode":"W001",
+"empcode":"",
+"minsales":75000,
+"percentile":3,
+"from_date":"2024-06-21",
+"to_date":"2024-07-10",
+"icid":1
+}
+
+
+### 
+POST http://localhost:4004/browse/InsentiveRanFor
+Content-Type: application/json
+ 
+{
+"schemeid": "ISC1",
+"schemename":"INCENTIVE SCHEME NO 1",
+"skuid":"",
+"regioncode":"W001",
+"empcode":"",
+"minsales":75000,
+"percentile":1.75,
+"from_date":"2024-06-21",
+"to_date":"2024-07-05"
+}
+
+###
+POST http://localhost:43785/report/sku_salesAgent
+Content-Type: application/json
+ 
+{
+"schemeid": "ISC1",
+"empcode":"104"
+}
+
+###
+POST http://localhost:40053/report/regionwise_salesAgent
+Content-Type: application/json
+ 
+{
+}
+ 
+###
+POST http://localhost:40053/report/schemewise_salesAgent
+Content-Type: application/json
+ 
+{
+}

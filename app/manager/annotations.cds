@@ -1,0 +1,1 @@
+using ManagerCalculation as service from '../../srv/service';

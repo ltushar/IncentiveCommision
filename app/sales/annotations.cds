@@ -1,0 +1,1 @@
+using InsentiveCommision as service from '../../srv/service';
