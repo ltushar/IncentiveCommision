@@ -68,11 +68,12 @@ class ManagerCalculation extends cds.ApplicationService {
                 const query2 = await db.run('SELECT TOP 1 (ROWSID + 1) AS ROWSID FROM ICM_TRANS_CAL_DATA WHERE ISDEL = 0 ORDER BY CID DESC', []);
                 var rowid = query2[0]["ROWSID"];
             }
-            
+
                 var statementpreparation = ' SELECT SKUID,REGIONCODE,SALES_AGENT, DAILY_SALES ,SALE_DATE,SUM(DAILY_SALES) OVER (PARTITION BY SALES_AGENT ORDER BY SALE_DATE,SKUID,REGIONCODE,SALES_AGENT) AS TOTAL_SALES , '
                     + ' (CASE WHEN SUM(DAILY_SALES) OVER (PARTITION BY SALES_AGENT ORDER BY SALE_DATE,SKUID,REGIONCODE,SALES_AGENT) >= ? '
                     + '  THEN TO_DECIMAL(SUM(DAILY_SALES) OVER (PARTITION BY SALES_AGENT ORDER BY SALE_DATE,SKUID,REGIONCODE,SALES_AGENT)* ?/100 ,10,2) ELSE 0 END ) AS TOTAL_INCENTIVE FROM '
-                    + ' (SELECT SKUID,REGIONCODE,SALES_AGENT,SUM(ACTUALSALES) AS DAILY_SALES ,SALE_DATE FROM ICM_TRANSACTION_SALESDATA WHERE 1=1 ';
+                    + ' (SELECT SKUID,REGIONCODE,SALES_AGENT,SUM(ACTUALSALES) AS DAILY_SALES ,SALE_DATE FROM ICM_TRANSACTION_SALESDATA WHERE 1=1 AND '
+                    +'  SALES_AGENT IN(SELECT DISTINCT EMPCODE FROM ICM_ORG_HIERARCHY WHERE REPORTING_TO_EMAIL = \'tushar.ladhe@initiumdigital.com\' ) ';
 
                 if (req.data.skuid !== null && req.data.skuid !== undefined && req.data.skuid !== '') {
                     statementpreparation += 'AND SKUID IN (\'' + req.data.skuid + '\') '
@@ -84,16 +85,16 @@ class ManagerCalculation extends cds.ApplicationService {
                     statementpreparation += 'AND SALES_AGENT IN (\'' + req.data.empcode + '\') '
                 }
                 statementpreparation += 'AND SALE_DATE BETWEEN ? AND ? GROUP BY SKUID,REGIONCODE,SALES_AGENT,SALE_DATE ORDER BY SALE_DATE ASC '
-                    + ' )GROUP BY SKUID,REGIONCODE,SALES_AGENT,SALE_DATE,DAILY_SALES ORDER BY SALE_DATE ASC ';
+                    + ' )GROUP BY SKUID,REGIONCODE,SALES_AGENT,SALE_DATE,DAILY_SALES ORDER BY SALE_DATE,TOTAL_SALES ASC ';
                 console.log(statementpreparation);
                 const sp = await dbConn.preparePromisified(statementpreparation);
 
                 if (req.data.to_date < dt) {
-                    SalesData = await dbConn.statementExecPromisified(sp, [req.data.minsales, req.data.percentile, req.data.from_date, req.data.to_date]);
+                    SalesData = await dbConn.statementExecPromisified(sp, [req.data.minsales, req.data.percentile,req.data.from_date, req.data.to_date]);
                 } else {
-                    SalesData = await dbConn.statementExecPromisified(sp, [req.data.minsales, req.data.percentile, req.data.from_date, dt]);
+                    SalesData = await dbConn.statementExecPromisified(sp, [req.data.minsales, req.data.percentile,req.data.from_date, dt]);
                 }
-
+                
                 
                 for (let i = 0; i < SalesData.length; i++) {
                     var targetObj = new Array();

@@ -8,7 +8,7 @@
     <tnt:ToolPage>
         <tnt:header>
             <tnt:ToolHeader>
-                <ObjectHeader title="Manager" />
+                <ObjectHeader title="Manager View 1" />
             </tnt:ToolHeader>
         </tnt:header>
         <tnt:sideContent>

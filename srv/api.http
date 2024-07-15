@@ -11,8 +11,8 @@ Content-Type: application/json
     "skuid": "",
     "regioncode": "W001",
     "empcode":"",
-    "minsales": "75000",
-    "percentile": "3" 
+    "minsales": "89000",
+    "percentile": "2.8" 
 }
 
 ### To Update the exisitng scheme
@@ -39,10 +39,10 @@ Content-Type: application/json
 "skuid":"",
 "regioncode":"W001",
 "empcode":"",
-"minsales":75000,
-"percentile":3,
-"from_date":"2024-06-21",
-"to_date":"2024-07-10",
+"minsales":89000,
+"percentile":2.8,
+"from_date":"2024-06-24",
+"to_date":"2024-07-12",
 "icid":1
 }
 
@@ -57,10 +57,10 @@ Content-Type: application/json
 "skuid":"",
 "regioncode":"W001",
 "empcode":"",
-"minsales":75000,
-"percentile":1.75,
-"from_date":"2024-06-21",
-"to_date":"2024-07-05"
+"minsales":89000,
+"percentile":2.8,
+"from_date":"2024-06-24",
+"to_date":"2024-07-12"
 }
 
 ###

@@ -45,26 +45,28 @@ entity Transaction_SalesData : managed {
 }
 
 entity Trans_Cal_data : managed {
-    key cid            : Integer;
-        schemeid       : String(100);
-        scheme         : String(100);
-        from_date      : Date;
-        to_date        : Date;
-        skuid          : String(255);
-        regioncode     : String(255);
-        sales_agent    : String(100);
-        sale_date      : Date;
-        daily_sales    : Decimal(10, 2);
-        total_sales    : Decimal(10, 2);
-        minsales       : Decimal(10, 2);
-        percentile     : Decimal(10, 2);
-        totalinsentive : Decimal(10, 2);
-        status         : String(100);
-        isdel          : String(1) default '0';
-        icid           : Integer;
-        jobid          : Integer;
-        rowsid         : Integer;
-        createddate    : Date;
+    key cid                : Integer;
+        schemeid           : String(100);
+        scheme             : String(100);
+        from_date          : Date;
+        to_date            : Date;
+        skuid              : String(255);
+        regioncode         : String(255);
+        sales_agent        : String(100);
+        sale_date          : Date;
+        daily_sales        : Decimal(10, 2);
+        total_sales        : Decimal(10, 2);
+        minsales           : Decimal(10, 2);
+        percentile         : Decimal(10, 2);
+        totalinsentive     : Decimal(10, 2);
+        status             : String(100);
+        isdel              : String(1) default '0';
+        icid               : Integer;
+        jobid              : Integer;
+        rowsid             : Integer;
+        createddate        : Date;
+        reporting_to       : String(100);
+        reporting_to_Email : String(100);
 }
 
 entity Sku_master : managed {
@@ -83,11 +85,12 @@ entity Region_master : managed {
 }
 
 entity Org_hierarchy : managed {
-    key ID           : UUID;
-        function     : String(255);
-        empcode      : String(100);
-        reporting_to : String(100);
-        isdel        : String(1);
+    key ID                 : UUID;
+        function           : String(255);
+        empcode            : String(100);
+        reporting_to       : String(100);
+        isdel              : String(1);
+        reporting_to_Email : String(100);
 }
 
 entity Employee_master : managed {
