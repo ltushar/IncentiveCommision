@@ -224,6 +224,46 @@ sap.ui.define(
         });
       },
 
+      onCalculationRun: function (oEvent) {
+        const path = oEvent.getSource().getBindingContext().getPath(),
+          oDataModel = this.getAppComponent().getModel(),
+          localModel = this.getView().getModel("localModel"),
+          serviceUrl = oDataModel.getServiceUrl(),
+          oView = this.getView();
+        oView.setBusy(true);
+
+        $.get(serviceUrl.slice(0, -1) + path, function (response) {
+          const payload = {
+            schemeid: response.schemeid,
+            schemename: response.schemename,
+            skuid: response.skuid,
+            regioncode: response.regioncode,
+            empcode: response.empcode,
+            minsales: response.minsales,
+            percentile: response.percentile,
+            from_date: response.from_date,
+            to_date: response.to_date,
+            icid: response.ICID,
+          };
+
+          $.ajax({
+            type: "POST",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            url: serviceUrl.replace("browse", "browse1") + "calculatedata",
+            data: JSON.stringify(payload),
+            success: function (response) {
+              oView.setBusy(false);
+              if (!response) MessageBox.warning("No sales data!");
+              else MessageBox.success("Job run successfully!");
+            },
+            error: function () {
+              oView.setBusy(false);
+            },
+          });
+        });
+      },
+
       /**
        * Internal functions
        */

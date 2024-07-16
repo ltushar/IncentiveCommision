@@ -57,9 +57,7 @@ sap.ui.define(
             data: JSON.stringify(payload),
             success: function (response) {
               oView.setBusy(false);
-              const regEx = /\d/g,
-                getNumber = (value) =>
-                  ((value || "").match(regEx) || "").join("");
+
               if (!response) {
                 MessageBox.warning("There no data for this scheme.");
                 return;
@@ -68,9 +66,12 @@ sap.ui.define(
               localModel.setProperty(
                 "/SalesTransData",
                 response.value.SalesTransData.sort(function (first, second) {
-                  const salesAgentComparison =
-                    Number(getNumber(first.SALES_AGENT)) -
-                    Number(getNumber(second.SALES_AGENT));
+                  const reg = /\d/g,
+                    _getNumber = (value) =>
+                      ((value || "").match(reg) || "").join(""),
+                    salesAgentComparison =
+                      Number(_getNumber(first.SALES_AGENT)) -
+                      Number(_getNumber(second.SALES_AGENT));
                   if (salesAgentComparison !== 0) {
                     return salesAgentComparison;
                   }

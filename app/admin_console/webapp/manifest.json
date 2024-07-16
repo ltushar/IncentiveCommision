@@ -101,7 +101,11 @@
       }
     },
     "resources": {
-      "css": []
+      "css": [
+        {
+          "uri": "style/main.css"
+        }
+      ]
     },
     "routing": {
       "config": {},

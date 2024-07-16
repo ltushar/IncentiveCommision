@@ -123,6 +123,9 @@
                 <Column>
                     <Label text="To Date" />
                 </Column>
+                <Column>
+                    <Label text="Action" />
+                </Column>
             </columns>
             <ColumnListItem>
                 <cells>
@@ -138,6 +141,13 @@
                     <Label text="{percentile}" />
                     <Label text="{from_date}" />
                     <Label text="{to_date}" />
+                    <!-- icon="sap-icon://media-play" -->
+                    <Button
+                        type="Emphasized"
+                        press="onCalculationRun"
+                        text="Run"
+                        icon="sap-icon://media-play"
+                    />
                 </cells>
             </ColumnListItem>
         </Table>
