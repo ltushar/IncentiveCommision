@@ -250,7 +250,7 @@ sap.ui.define(
             type: "POST",
             dataType: "json",
             contentType: "application/json; charset=utf-8",
-            url: serviceUrl.replace("browse", "browse1") + "calculatedata",
+            url: serviceUrl + "calculatedata",
             data: JSON.stringify(payload),
             success: function (response) {
               oView.setBusy(false);

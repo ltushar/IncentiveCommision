@@ -15,15 +15,7 @@
                 <Column>
                     <Label text="Scheme Name" />
                 </Column>
-                <!-- <Column>
-                    <Label text="SKU Name" />
-                </Column>
-                <Column>
-                    <Label text="Region" />
-                </Column>
-                <Column>
-                    <Label text="Employee Code" />
-                </Column> -->
+
                 <Column>
                     <Label text="Minimum Sales" />
                 </Column>
@@ -36,30 +28,17 @@
                 <Column>
                     <Label text="To Date" />
                 </Column>
-                <Column>
-                    <Label text="" />
-                </Column>
             </columns>
-            <ColumnListItem>
+            <ColumnListItem
+                type="Navigation"
+                press="onCalculationNav"
+            >
                 <cells>
                     <Label text="{path: 'schemename'}" />
-                    <!-- <Label text="{path: 'skuid', formatter: '._onFormatSKU'}" />
-                    <Label
-                        text="{path: 'regioncode', formatter: '._onFormatRegion'}"
-                    />
-                    <Label
-                        text="{path: 'empcode', formatter: '._onFormatOrg'}"
-                    /> -->
                     <Label text="{minsales}" />
                     <Label text="{percentile}" />
                     <Label text="{from_date}" />
                     <Label text="{to_date}" />
-                    <Button
-                        type="Emphasized"
-                        press="onCalculationRun"
-                        text="Run"
-                        icon="sap-icon://media-play"
-                    />
                 </cells>
             </ColumnListItem>
         </Table>

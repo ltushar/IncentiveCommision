@@ -1,0 +1,61 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+>
+    <Dialog showHeader="false">
+        <content>
+            <Table
+                id="idCalTable"
+                sticky="ColumnHeaders"
+                noDataText="No sales data found!"
+                growing="true"
+                items="{path: '/CalcData', sorter:[{path:'sales_agent', group:true},{path:'sale_date', descending:true}]}"
+            >
+                <columns>
+                    <Column mergeDuplicates="true">
+                        <Label text="Sales Agent" />
+                    </Column>
+                    <Column>
+                        <Label text="Stock Keeping Unit" />
+                    </Column>
+                    <Column>
+                        <Label text="Sales Date" />
+                    </Column>
+                    <Column>
+                        <Label text="Daily Sales" />
+                    </Column>
+                    <Column>
+                        <Label text="Total Sales" />
+                    </Column>
+                    <Column>
+                        <Label text="Total Incentive" />
+                    </Column>
+                </columns>
+                <ColumnListItem>
+                    <cells>
+                        <Text text="{sales_agent}" />
+
+                        <Text text="{skuid}" />
+                        <Text
+                            text="{path: 'sale_date', formatter: '.onDateFormatter'}"
+                        />
+                        <Text text="₹ {daily_sales}" />
+
+                        <Text text="₹ {total_sales}" />
+                        <Text text="₹ {totalinsentive}" />
+                    </cells>
+                </ColumnListItem>
+            </Table>
+        </content>
+
+        <endButton>
+            <Button
+                press="onCalculationNavClose"
+                text="Close"
+                type="Reject"
+                icon="sap-icon://cancel"
+            />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

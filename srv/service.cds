@@ -7,12 +7,8 @@ service InsentiveCommision @(path: '/browse') {
     entity Region          as projection on my.Region_master;
     entity OrgData         as projection on my.Org_hierarchy;
     entity EmpMaster       as projection on my.Employee_master;
-}
+    entity CalcData        as projection on my.Trans_Cal_data;
 
-service ManagerCalculation @(path: '/browse1') @(impl: './service.js') {
-     entity Insentive       as projection on my.InsentiveConfiguration;
-     entity InsentiveRanFor as projection on my.InsentiveRanForDates;
-     entity CalcData        as projection on my.Trans_Cal_data;
     action calculatedata(schemeid : String,
                          schemename : String,
                          skuid : String,
@@ -23,6 +19,22 @@ service ManagerCalculation @(path: '/browse1') @(impl: './service.js') {
                          from_date : Date,
                          to_date : Date,
                          icid : Integer) returns String;
+}
+
+service ManagerCalculation @(path: '/browse1') @(impl: './service.js') {
+    entity Insentive       as projection on my.InsentiveConfiguration;
+    entity InsentiveRanFor as projection on my.InsentiveRanForDates;
+// entity CalcData        as projection on my.Trans_Cal_data;
+// action calculatedata(schemeid : String,
+//                      schemename : String,
+//                      skuid : String,
+//                      regioncode : String,
+//                      empcode : String,
+//                      minsales : Decimal,
+//                      percentile : Decimal,
+//                      from_date : Date,
+//                      to_date : Date,
+//                      icid : Integer) returns String;
 
 }
 

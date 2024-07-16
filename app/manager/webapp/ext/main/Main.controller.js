@@ -1,6 +1,12 @@
 sap.ui.define(
-  ["sap/fe/core/PageController", "sap/m/MessageBox", "sap/ui/core/Fragment"],
-  function (PageController, MessageBox, Fragment) {
+  [
+    "sap/fe/core/PageController",
+    "sap/m/MessageBox",
+    "sap/ui/core/Fragment",
+    "sap/ui/model/Filter",
+    "sap/ui/model/FilterOperator",
+  ],
+  function (PageController, MessageBox, Fragment, Filter, FilterOperator) {
     "use strict";
 
     return PageController.extend("manager.ext.main.Main", {
@@ -104,6 +110,35 @@ sap.ui.define(
         return sap.ui.core.format.DateFormat.getDateInstance({
           pattern: "dd MMM, yyyy",
         }).format(oDateObjectNew);
+      },
+
+      onCalculationNav: function (oEvent) {
+        const oView = this.getView(),
+          sQuery = oEvent.getSource().getBindingContext().getObject("ICID");
+
+        if (!this._oNewCalculatePopUp) {
+          this._oNewCalculatePopUp = Fragment.load({
+            id: oView.getId(),
+            name: "manager.ext.fragment.CalculateResult",
+            controller: this,
+          }).then(function (oDialog) {
+            oView.addDependent(oDialog);
+            return oDialog;
+          });
+        }
+
+        this._oNewCalculatePopUp.then(function (oDialog) {
+          oDialog.open();
+
+          oDialog
+            .getContent()[0]
+            .getBinding("items")
+            .filter([new Filter("icid", FilterOperator.EQ, sQuery)]);
+        });
+      },
+
+      onCalculationNavClose: function () {
+        this._oNewCalculatePopUp.then((oDialog) => oDialog.close());
       },
     });
   }

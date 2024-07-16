@@ -17,7 +17,7 @@
     },
     "dataSources": {
       "mainService": {
-        "uri": "/browse1/",
+        "uri": "/browse/",
         "type": "OData",
         "settings": {
           "annotations": [],
