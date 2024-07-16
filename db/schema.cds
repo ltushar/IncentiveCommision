@@ -37,11 +37,40 @@ entity InsentiveRanForDates : cuid, managed {
 
 
 entity Transaction_SalesData : managed {
-    skuid       : String(255);
-    regioncode  : String(255);
-    sales_agent : String(100);
-    actualsales : Decimal(10, 2);
-    sale_date   : Date;
+    skuid         : String(255);
+    regioncode    : String(255);
+    sales_agent   : String(100);
+    actualsales   : Decimal(10, 2);
+    sale_date     : Date;
+    SalesOrg      : String(10);
+    Districhannel : String(10);
+    Division      : String(10);
+    SalesOfc      : String(10);
+    Desc          : String(100);
+    SalesGrp      : String(10);
+    SalesGrpDesc  : String(100);
+    reporting_to  : String(10);
+    Description1  : String(100);
+    SalesDoctype  : String(20);
+    Description2  : String(100);
+    RefDocNo      : String(20);
+    SalesDocNo    : String(20);
+    SoldtoParty   : String(20);
+    Description3  : String(100);
+    Description4  : String(100);
+    OrderQty      : String(20);
+    SalesUnit     : String(20);
+    Plant         : String(20);
+    Currency      : String(20);
+    ExchangeRate  : String(20);
+    DeliveryNo    : String(20);
+    DeliveryDate  : Date;
+    DeliveryQuant : String(20);
+    BillTypes     : String(20);
+    BillNo        : String(20);
+    BillDate      : Date;
+    Payterms      : String(20);
+
 }
 
 entity Trans_Cal_data : managed {
