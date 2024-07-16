@@ -63,45 +63,15 @@ sap.ui.define(
             data: JSON.stringify(payload),
             success: function (response) {
               oView.setBusy(false);
-<<<<<<< HEAD
-
-=======
-              const regEx = /\d/g,
-                getNumber = (value) =>
-                  ((value || "").match(regEx) || "").join("");
->>>>>>> 716334d2fc9f76ab12314be1c6c65ff32ed31e95
+            
               if (!response) {
                 MessageBox.warning("There no data for this scheme.");
                 return;
               }
- 
+
               localModel.setProperty(
                 "/SalesTransData",
-                response.value.SalesTransData.sort(function (first, second) {
-<<<<<<< HEAD
-                  const reg = /\d/g,
-                    _getNumber = (value) =>
-                      ((value || "").match(reg) || "").join(""),
-                    salesAgentComparison =
-                      Number(_getNumber(first.SALES_AGENT)) -
-                      Number(_getNumber(second.SALES_AGENT));
-                  if (salesAgentComparison !== 0) {
-                    return salesAgentComparison;
-                  }
-
-=======
-                  const salesAgentComparison =
-                    Number(getNumber(first.SALES_AGENT)) -
-                    Number(getNumber(second.SALES_AGENT));
-                  if (salesAgentComparison !== 0) {
-                    return salesAgentComparison;
-                  }
- 
->>>>>>> 716334d2fc9f76ab12314be1c6c65ff32ed31e95
-                  const dateA = new Date(first.SALE_DATE || 0);
-                  const dateB = new Date(second.SALE_DATE || 0);
-                  return dateA.getTime() - dateB.getTime();
-                })
+                response.value.SalesTransData
               );
               that._oCalculatePopUp.then((oDialog) => oDialog.open());
             },
