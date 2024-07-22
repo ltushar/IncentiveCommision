@@ -10,7 +10,7 @@
                 sticky="ColumnHeaders"
                 noDataText="No sales data found!"
                 growing="true"
-                items="{path: '/CalcData', sorter:[{path:'sales_agent', group:true},{path:'sale_date', descending:true}]}"
+                items="{path: '/CalcData', sorter:[{path:'sales_agent', group:true},{path:'sale_date', descending:false}]}"
             >
                 <columns>
                     <Column mergeDuplicates="true">
